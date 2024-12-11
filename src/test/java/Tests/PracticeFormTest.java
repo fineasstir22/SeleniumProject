@@ -61,8 +61,6 @@ public class PracticeFormTest {
         File file = new File("src/test/java/Tests/resources/testImg.png");
         pictureUploadForm.sendKeys(file.getAbsolutePath());
 
-
-
     }
 
 }
