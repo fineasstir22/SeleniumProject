@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 public class WebTableTest {
 
     public WebDriver driver;
+    public String homePage = "https://demoqa.com/";
 
     @Test
     public void WebTableTest() {
@@ -19,7 +20,7 @@ public class WebTableTest {
         driver = new ChromeDriver();
 
         //accesam o pagina web
-        driver.get("https://demoqa.com/");
+        driver.get(homePage);
 
         //facem browser-ul in modul maximize
         driver.manage().window().maximize();
