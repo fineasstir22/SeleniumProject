@@ -1,9 +1,6 @@
 package Tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
@@ -49,11 +46,11 @@ public class PracticeFormTest {
         WebElement genderOtherRadioButton = driver.findElement(By.xpath("//label[@for='gender-radio-3']"));
 
         String genderType = "Other";
-        if (genderType.equals("Male")) {
+        if (genderMaleRadioButton.getText().equals(genderType)) {
             genderMaleRadioButton.click();
-        } else if (genderType.equals("Female")) {
+        } else if (genderFemaleRadioButton.getText().equals(genderType)) {
             genderFemaleRadioButton.click();
-        } else if (genderType.equals("Other")) {
+        } else if (genderOtherRadioButton.getText().equals(genderType)) {
             genderOtherRadioButton.click();
         }
 
@@ -63,8 +60,16 @@ public class PracticeFormTest {
         userPhoneNumberForm.sendKeys(userPhoneNumberFormText);
 
 
-        JavascriptExecutor jsScroll = (JavascriptExecutor) driver;
-        jsScroll.executeScript("window.scrollBy(0,200)");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,200)");
+
+
+        WebElement subjectsElementForm = driver.findElement(By.id("subjectsInput"));
+        String subjectsElementValue = "Social Studies";
+        subjectsElementForm.sendKeys(subjectsElementValue);
+        subjectsElementForm.sendKeys(Keys.ENTER);
+
+
         WebElement userSportsHobbiesForm = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-1']"));
         WebElement userReadingHobbiesForm = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-2']"));
         WebElement userMusicHobbiesForm = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-3']"));
@@ -89,17 +94,24 @@ public class PracticeFormTest {
         pictureUploadForm.sendKeys(file.getAbsolutePath());
 
 
-        jsScroll.executeScript("window.scrollBy(0,400)");
-        WebElement selectStateForm = driver.findElement(By.xpath("//div[@class=' css-yk16xz-control']//div[@class=' css-1wy0on6']"));
-        selectStateForm.click();
+        js.executeScript("window.scrollBy(0,400)");
 
+        WebElement addressForm = driver.findElement(By.id("currentAddress"));
+        String addressFormText = "Vaida Voievod 152, Cluj-Napoca";
+        addressForm.sendKeys(addressFormText);
 
-        WebElement chooseStateFromDropdown = driver.findElement(By.xpath("//div[@class=' css-1uccc91-singleValue']"));
-        String selectStateFromDropdownText = "Uttar Pradesh";
-        if (selectStateFromDropdownText.equals("Uttar Pradesh")) {
-            chooseStateFromDropdown.click();
-        }
+        WebElement selectStateForm = driver.findElement(By.id("react-select-3-input"));
+        js.executeScript("arguments[0].click();", selectStateForm);
+        selectStateForm.sendKeys("NCR");
+        selectStateForm.sendKeys(Keys.ENTER);
 
+        WebElement selectCity = driver.findElement(By.id("react-select-4-input"));
+        js.executeScript("arguments[0].click();", selectCity);
+        selectCity.sendKeys("Delhi");
+        selectCity.sendKeys(Keys.ENTER);
+
+        WebElement submitButton = driver.findElement(By.id("submit"));
+        submitButton.click();
 
     }
 
