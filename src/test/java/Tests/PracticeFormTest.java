@@ -16,7 +16,7 @@ public class PracticeFormTest {
 
 
     @Test
-    public void automationMethod(){
+    public void automationMethod() {
 
         driver = new ChromeDriver();
         driver.get(homePage);
@@ -45,11 +45,38 @@ public class PracticeFormTest {
 
         //WebElement genderSelectionForm = driver.findElement(By.id("genterWrapper"));
         WebElement genderMaleRadioButton = driver.findElement(By.xpath("//label[@for='gender-radio-1']"));
-        genderMaleRadioButton.click();
+        WebElement genderFemaleRadioButton = driver.findElement(By.xpath("//label[@for='gender-radio-2']"));
+        WebElement genderOtherRadioButton = driver.findElement(By.xpath("//label[@for='gender-radio-3']"));
+
+        String genderType = "Other";
+        if (genderType.equals("Male")) {
+            genderMaleRadioButton.click();
+        } else if (genderType.equals("Female")) {
+            genderFemaleRadioButton.click();
+        } else if (genderType.equals("Other")) {
+            genderOtherRadioButton.click();
+        }
+
 
         WebElement userPhoneNumberForm = driver.findElement(By.cssSelector("input[placeholder='Mobile Number']"));
         String userPhoneNumberFormText = "1234567890";
         userPhoneNumberForm.sendKeys(userPhoneNumberFormText);
+
+
+        JavascriptExecutor jsScroll = (JavascriptExecutor) driver;
+        jsScroll.executeScript("window.scrollBy(0,200)");
+        WebElement userSportsHobbiesForm = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-1']"));
+        WebElement userReadingHobbiesForm = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-2']"));
+        WebElement userMusicHobbiesForm = driver.findElement(By.xpath("//label[@for='hobbies-checkbox-3']"));
+
+        String hobbiesType = "Music";
+        if (hobbiesType.equals("Music")) {
+            userMusicHobbiesForm.click();
+        } else if (hobbiesType.equals("Sports")) {
+            userSportsHobbiesForm.click();
+        } else if (hobbiesType.equals("Reading")) {
+            userReadingHobbiesForm.click();
+        }
 
         //WebElement userDateOfBirthForm = driver.findElement(By.id("dateOfBirthInput"));
         //userDateOfBirthForm.click();
@@ -60,6 +87,19 @@ public class PracticeFormTest {
         WebElement pictureUploadForm = driver.findElement(By.id("uploadPicture"));
         File file = new File("src/test/java/Tests/resources/testImg.png");
         pictureUploadForm.sendKeys(file.getAbsolutePath());
+
+
+        jsScroll.executeScript("window.scrollBy(0,400)");
+        WebElement selectStateForm = driver.findElement(By.xpath("//div[@class=' css-yk16xz-control']//div[@class=' css-1wy0on6']"));
+        selectStateForm.click();
+
+
+        WebElement chooseStateFromDropdown = driver.findElement(By.xpath("//div[@class=' css-1uccc91-singleValue']"));
+        String selectStateFromDropdownText = "Uttar Pradesh";
+        if (selectStateFromDropdownText.equals("Uttar Pradesh")) {
+            chooseStateFromDropdown.click();
+        }
+
 
     }
 
